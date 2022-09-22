@@ -1,22 +1,18 @@
-""" Problem "Reorder List"
-
-This problem was taken from leetcode, great webpage to do coding challenges from.
-This is the link for this exact problem, https://leetcode.com/problems/reorder-list/.
-"""
-
-"""Problem Itself,
-TODO: Copy the actual problem in your own words.
-
-"""
-
-"""Insights,
+'''Insights,
         - compare when recursion goes through the first elements in order, how it moves
         - first data point, recursion, depending on where you place the print can either read forward or backwards
+        - to know the size of the linkedlist I can use recursion forward, then once everything is on the call stack, I can get the amount of nodes that will change into something else, after that has happened, I can following a pattern add then to the linkedlist using another stack, this other stack goes last one in first, then whatever amount the pattern commands, then based on the pattern that varies whether it is even or un even,
         - I must understand how many must rotate, whatever is half - 1
             => when it was 4, I rotated 4/2 - 1 = 1
             => when it was 8, I rotated 8/2 - 1 = 3
             => when it was 5, I rotated 5/2 lower decimal = 2
             => when it was 9, I rotated 9/2 lower decimal = 4
+                => the amount of nodes that will change place is
+                =>even number 
+                =>
+        
+        - When you use recursion, every node goes into the call stack, then it is about using that structure ...
+            => 
         
 Diagramming + Logic, 
 
@@ -90,11 +86,55 @@ Understanding case scenarios, when its 9 nodes
     (1)=>    (9)=>    (2)=>    (8)=>    (3)=>    (4)=>    (5)=>    (6)=>   (7)=>   None
                                                ^=                          <=
 
-    (1)=>    (2)=>    (3)=>    (4)=>    (5)=>    (6)=>    (7)=>    (8)=>   (9)=>   None
+    (1)=>    (9)=>    (2)=>    (8)=>    (3)=>    (7)=>    (4)=>    (5)=>   (6)=>   None
                                                                  ^=        <=
+                                                                 
+    (1)=>    (9)=>    (2)=>    (8)=>    (3)=>    (7)=>    (4)=>    (6)=>   (5)=>   None
+    
+Solution 1 "Using the call stack from the recursive call and another stack"
+**Making the pattern for even and un-even
 
-"""
+9 nodes example, this is what must happen
 
+    (1)=>    (2)=>    (3)=>    (4)=>    (5)=>    (6)=>    (7)=>    (8)=>   (9)=>   None
+           ^=                                                              <=
+
+    (1)=>    (9)=>    (2)=>    (3)=>    (4)=>    (5)=>    (6)=>    (7)=>   (8)=>   None
+                             ^=                                            <=
+    
+    (1)=>    (9)=>    (2)=>    (8)=>    (3)=>    (4)=>    (5)=>    (6)=>   (7)=>   None
+                                               ^=                          <=
+
+    (1)=>    (9)=>    (2)=>    (8)=>    (3)=>    (7)=>    (4)=>    (5)=>   (6)=>   None
+                                                                 ^=        <=
+                                                                 
+    (1)=>    (9)=>    (2)=>    (8)=>    (3)=>    (7)=>    (4)=>    (6)=>   (5)=>   None
+    
+VARIABLES
+    stack = []
+    counter = 0    
+    
+
+    (1)=>    (2)=>    (3)=>    (4)=>    (5)=>    (6)=>    (7)=>    (8)=>   (9)=>   None
+    
+    
+*call_stack = []
+
+
+
+8 nodes example
+
+    (1)=>    (2)=>    (3)=>    (4)=>    (5)=>    (6)=>    (7)=>    (8)=>   None
+           ^=                                                      <=
+
+    (1)=>    (8)=>    (2)=>    (3)=>    (4)=>    (5)=>    (6)=>    (7)=>   None
+                             ^=                                    <=
+    
+    (1)=>    (8)=>    (2)=>    (7)=>    (3)=>    (4)=>    (5)=>    (6)=>   None
+                                               ^=                  <=
+
+    (1)=>    (8)=>    (2)=>    (7)=>    (3)=>    (6)=>    (4)=>    (5)=>   None
+'''
 
 
 # Definition for singly-linked list.
@@ -123,19 +163,32 @@ class Solution:
         """
         Do not return anything, modify head in-place instead.
         """
-        print(self.num_shifts(head))
-        return 
+        # first lets do the counting on the forward path
+        self.counter = 0
+        self.lenght = 0
+        # Now I must create another stack to store # num of stack based on the lenght of lenght
         
-        """
-        def helper(node,counter):
-            if node is None: return 
-
+        def helper(node):
+            if node is None: 
+                if self.lenght == 0:
+                    self.lenght = self.counter
+                    # I must using the rule know how many nodes I must put in the stack to re organize them into the linkedlist
+                return 
             
-            helper(node.next,counter+1)
-            print("this is the node.val = ",node.val)
-            print("this is the counter = ",counter)
+            #pre call stack
+            self.counter +=1
+            print("counter", self.counter)
+            
+            helper(node.next)
+            
+            #post call stack
+            #self.lenght = self.counter
+            #print("lenght", self.lenght)
+            
         
-        helper(head,0)
+        helper(head)
+        print("Counter",self.counter)
+        print("Lenght",self.lenght)
         return 
-        """
-        
+    
+                
