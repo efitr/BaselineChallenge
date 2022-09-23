@@ -49,6 +49,25 @@ VARIABLES
 
 Output: [1,4,2,3]
 
+Understanding case scenarios, when its 4 nodes
+
+counter      1.       2.       3.       4 
+            (1)=>    (2)=>    (3)=>    (4)=>    None
+                   ^=                  <=
+
+            (1)=>    (4)=>    (2)=>    (3)=>    None DONE
+
+counter = 1 => 2 => 3 => 4
+lenght = 4//2-1 => 1
+Call stack, once it hits none, start going back to the beggining 
+ None ]
+ (4)=> X
+ (3)=> X
+ (2)=> X prev_node.next (4)=>.next= node.next
+[(1)=> 
+
+Stack,
+(4)=>
 
 Understanding case scenarios, when its 8 nodes
 
@@ -144,51 +163,52 @@ VARIABLES
 #         self.next = next
 class Solution:
     
-    def num_shifts(self, head):
-        num = 0
-        
-        while head.next != None:
-            head = head.next
-            num += 1
-        
-        if num % 2 == 0:
-            print("first if")
-            return (num//2)
-        else:
-            print("else")
-            return (num//2)-1
-        
-    
+
     def reorderList(self, head: Optional[ListNode]) -> None:
         """
         Do not return anything, modify head in-place instead.
         """
-        # first lets do the counting on the forward path
-        self.counter = 0
-        self.lenght = 0
+        self.stack = []
+        self.stack_count = 0
         # Now I must create another stack to store # num of stack based on the lenght of lenght
         
-        def helper(node):
+        num = 9
+        num1 = 10
+        '''
+        if num % 2 == 0:
+            print("9 is even")
+        if num1 % 2 == 0:
+            print("10 is even") => this one prints
+        '''
+        def helper(node, counter):
             if node is None: 
-                if self.lenght == 0:
-                    self.lenght = self.counter
-                    # I must using the rule know how many nodes I must put in the stack to re organize them into the linkedlist
                 return 
             
-            #pre call stack
-            self.counter +=1
-            print("counter", self.counter)
+            if node.next is None:  
+                print("\n")
+                if counter % 2 == 0:
+                    self.stack_count = counter // 2 - 1
+                    print("self.stack_count = ",self.stack_count)
+                    print("\n")
+                else:
+                    self.stack_count = counter // 2
+                    print("self.stack_count = ",self.stack_count)
+                    print("\n")
+            print("pre recursive call")
+            print("this is the counter == ", counter)
+            helper(node.next, counter+1)
+            print("\n")
+            print("post recursive call")
+            print("this is the counter == ", counter)
             
-            helper(node.next)
-            
-            #post call stack
-            #self.lenght = self.counter
-            #print("lenght", self.lenght)
+            # I must get the stack to have the last 1 value
+            if self.stack_count > 0:
+                #if counter 
+                print("This is top value before decreasing should be 1 == ",self.stack_count)
+                self.stack_count -= 1
+                print("This is top value after decreasing should be 0 == ",self.stack_count)
             
         
-        helper(head)
-        print("Counter",self.counter)
-        print("Lenght",self.lenght)
+        helper(head, 1)
+
         return 
-    
-                
