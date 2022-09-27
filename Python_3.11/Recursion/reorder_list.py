@@ -108,6 +108,8 @@ Blueprint:
         helper(head.next, head, 2)
 
         return 
+        
+Must figure out for 
 
 '''
 
@@ -131,6 +133,7 @@ class Solution:
             if node is None: 
                 return 
 
+            #there is a chance that all node.val are actually the number in order, therefore I could use that instead of the counter
             if node.next is None:  
                 if counter % 2 == 0:
                     self.stack_count = counter // 2 - 1
@@ -143,21 +146,21 @@ class Solution:
                 if self.stack_count == 0:
                     node.next = None
                     self.stack_count -= 1
+                    if len(self.stack) % 2 == 0:
+                        stack_node = self.stack.pop()
+                        stack_node.next = node
+                        prev_node.next = stack_node
                 else:
                     node.next = None
                     self.stack.append(node)
                     self.stack_count -= 1
+                    
 
             else:
-                #if counter == len(self.stack)-1:
-                print("before counter    = ",counter)
-                print("before self.stack = ",self.stack)
                 stack_node = self.stack.pop()
                 stack_node.next = node
                 prev_node.next = stack_node
-                print("after  counter    = ",counter)
-                print("after  self.stack = ",self.stack)
-                print("\n")
+
 
                 
         helper(head.next, head, 2)
