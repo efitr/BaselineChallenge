@@ -109,7 +109,8 @@ Blueprint:
 
         return 
         
-Must figure out for 
+# Must figure out for [1,2] and [1,2,3], either returns an error
+# For some reason 26,27 doesnt work
 
 '''
 
