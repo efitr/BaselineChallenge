@@ -6,8 +6,6 @@ Diagramming + Logic,
 
 n = 12
 
-    [ 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 11 , 12 ]
-    
           ( n, isLeft): 
     helper(12,    1  ) => 6
     => 
@@ -63,6 +61,72 @@ n = 12
     else:
         return 2*helper(n//2, 1) - 1
 
+
+n = 22
+
+return helper(22, 1)
+             (22,1)
+        Xif(22==1): 
+            return 1
+
+        if(1): => 1 in python is true, 0 is false
+            return 2*helper(22//2, 0) =>2*4 => 8
+                           ( 11 ,  0)
+                    Xif(n==1): 
+                        return 1
+
+                    Xif(isLeft):=> 0 is false, therefore this doesnt work
+                        return 2*helper(n//2, 0)
+
+                    elif(n%2==1): => 11 divided by 2 would have a remainder of 1
+                        return 2*helper(n//2, 1) => 2*2 => 4
+                                       (  5 , 1)
+                                        Xif(5==1): 
+                                            return 1
+
+                                        if(isLeft=>1): #since isLeft is 1 this means true for python
+                                            return 2*helper(n//2, 0) => 2*1 => 2
+                                                           (  2 , 0) 
+                                                            Xif(n==1): 
+                                                                return 1
+
+                                                            Xif(isLeft):
+                                                                return 2*helper(n//2, 0)
+
+                                                            Xelif(n%2==1):
+                                                                return 2*helper(n//2, 1)
+
+                                                            else:
+                                                                return (2*helper(n//2, 1)) - 1 => 2*1-1 => 1
+                                                                                (  1 , 1)
+                                                                                if(n==1): 
+                                                                                    return 1
+                                                                        
+                                                                                Xif(isLeft):
+                                                                                    return 2*helper(n//2, 0)
+
+                                                                                Xelif(n%2==1):
+                                                                                    return 2*helper(n//2, 1)
+
+                                                                                Xelse:
+                                                                                    return (2*helper(n//2, 1)) - 1
+
+                                                                
+                                        elif(n%2==1):
+                                            return 2*helper(n//2, 1)
+
+                                        else:
+                                            return (2*helper(n//2, 1)) - 1
+
+                    else:
+                        return (2*helper(n//2, 1)) - 1
+
+        elif(n%2==1):
+            return 2*helper(n//2, 1)
+
+        else:
+            return (2*helper(n//2, 1)) - 1
+
 Blueprint 
 
         def helper(n, isLeft): 
@@ -79,6 +143,15 @@ Blueprint
                 return (2*helper(n//2, 1)) - 1
             
         return helper(n, 1)
+        
+Solution 1: #This solution does not belong to me, I learned it from Leetcode discussion
+The pattern this problem utilizes to reach to solution is it breaks down the problem into two types of steps,
+    - Since the isLeft is bound to happen every other time, with a isLeft of meaning it is at the start of the number
+    - Then the other option is the elif and else, since they must happen depending on whether the value is odd or not, in which case isLeft becomes 1 again implying you are at the start of the recently cut in half array
+    
+Hindsight:
+    - This examples utilizes a very good appraoch towards recursion, since it makes full use of its potential to go into the stack call and brings back the solution while it comes back from the recursive stack
+
 
 '''
 
@@ -89,59 +162,25 @@ class Solution:
 
             if(n==1): return 1
 
-            if(isLeft):
+            if(isLeft==1):
+                print("if(isLeft): for n == ", n)
                 print("this is the isLeft == ",isLeft, "this is current n == ",n)
+                print("\n")
                 return 2*helper(n//2, 0)
 
             elif(n%2==1):
-                print("Does this happens? elif(n%2==1)")
+                print("elif(n%2==1):")
+                print("Does this happens? elif(n%2==1) under which n ", n)
+                print("\n")
                 return 2*helper(n//2, 1)
                 print("do I ever get here")
 
             else:
-                print("Does this happens? else")
+                print("else: for n == ", n)
+                print("\n")
                 return (2*helper(n//2, 1)) - 1
 
 
         return helper(n, 1)
         
-        '''
-        def helper(n, isLeft):
-            
-            if(n==1): return 1
-            
-            #print(isLeft)
-            if(isLeft):
-                print("hey")
-                return 2*helper(n//2, 0)
-    # if started from left side the odd elements will be removed, the only remaining ones will the the even i.e.
-    #       [1 2 3 4 5 6 7 8 9]==   [2 4 6 8]==     2*[1 2 3 4]
-            elif(n%2==1):
-                return 2*helper(n//2, 1)
-    # same as left side the odd elements will be removed
-            else:
-                return 2*helper(n//2, 1) - 1
-    # even elements will be removed and the only left ones will be [1 2 3 4 5 6 ]== [1 3 5]== 2*[1 2 3] - 1
-            
-        return helper(n, 1)
-        '''
-        '''
-        arr = []
         
-        for n in range(1,n+1):
-            arr.append(n)
-        
-        if len(arr) <= 3:
-            if len(arr) == 1 :
-                return arr[0]
-            #elif len(arr) == 2 or len(arr) == 3
-            else:
-                return arr[1]
-        
-        else:
-            while len(arr) > 1:
-            
-            
-            
-        return 
-        '''
