@@ -35,6 +35,83 @@ house_fortune[1] + house_fortune[4] => 8
 
 Output: 4 => you rob house_fortune[0] + house_fortune[2]
 
+Making example inputs to validate my edge cases and find a solution
+    - the edge case that worries me is when I must sum the furthest then the closest but the closest while is the worst briefly then becomes the best option for total sum
+    - closest means sum = house_fortune[x] + house_fortune[x+2]
+    - furthest means sum = house_fortune[x] + house_fortune[x+3]
+    - any other further option would make no sense to not add the closest, since there are no negative values and a 0 at worst case wouldnt affect negatively
+    
+    x2
+    Eg. Closest, Closest
+    [ 2 , 7 , 9 , 3 , 1 , 1 ]
+      +       +       +       => 12
+    
+    Eg. Furthest, Furthest
+    [ 2 , 7 , 9 , 11 , 1 , 1 , 2 ]
+      +           +            +      => 14
+
+    x3
+    Eg. Furthest, Furthest, Closest
+    [ 2 , 7 , 9 , 11 , 1 , 1 , 2 , 1 , 1 , 1]
+      +           +            +       + => 14
+      
+    Eg. Closest, Closest, Furthest
+    [ 2 , 7 , 9 , 11 , 1 , 1 , 2 , 1 ]
+      +       +        +           +      => 14
+    
+    x4
+    Eg. Furthest, Closest, Furthest, Closest
+    []x14
+
+    
+    Eg. Furthest, Closest, Furthest, Furthest
+    []x14
+    
+    
+    Eg. Closest, Furthest, Closest, Closest
+    []x14
+    
+    
+    Eg. Closest, Furthest, Closest, Furthest
+    []x14
+    
+    
+    x5
+    Eg. Furthest, Closest, Furthest, Closest, Closest
+    []x17
+
+
+    Eg. Furthest, Closest, Furthest, Closest, Furthest
+    []x17
+
+
+    Eg. Furthest, Closest, Furthest, Furthest, Closest
+    []x17
+    
+    
+    Eg. Furthest, Closest, Furthest, Furthest, Furthest
+    []x17
+    
+    
+    Eg. Closest, Furthest, Closest, Closest, Closest
+    []x17
+    
+    
+    Eg. Closest, Furthest, Closest, Closest, Furthest
+    []x17
+    
+    
+    Eg. Closest, Furthest, Closest, Furthest, Closest
+    []x17
+    
+    
+    Eg. Closest, Furthest, Closest, Furthest, Furthest
+    []x17
+    
+    
+      
+VARIABLES
+curr_max = ()
 '''
 
 class Solution:
