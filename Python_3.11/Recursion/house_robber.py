@@ -47,30 +47,33 @@ Making example inputs to validate my edge cases and find a solution
       +       +       +       => 12
     
     Eg. Furthest, Furthest
-    [ 2 , 7 , 9 , 11 , 1 , 1 , 2 ]
-      +           +            +      => 14
+    [ 7 , 2 , 9 , 11 , 1 , 1 , 2 ]
+      +           +            +      => 20
 
     x3
-    Eg. Furthest, Furthest, Closest
+    Eg. Closest, Furthest, Closest
     [ 2 , 7 , 9 , 11 , 1 , 1 , 2 , 1 , 1 , 1]
-      +           +            +       + => 14
+          +       +            +       +      => 21
+          +       +        +       +       +  => 21
       
     Eg. Closest, Closest, Furthest
-    [ 2 , 7 , 9 , 11 , 1 , 1 , 2 , 1 ]
-      +       +        +           +      => 14
+    [ 2 , 7 , 9 , 11 , 1 , 3 , 2 , 1 , 2 ]
+          +       +        +           +      => 23
     
     x4
     Eg. Furthest, Closest, Furthest, Closest
-    []x14
-
+    [ 2 , 1 , 1 , 3 , 2 , 3 , 1 , 4 , 2 , 1 , 1]x14
+      +           +       +       +       +   => 13
     
     Eg. Furthest, Closest, Furthest, Furthest
-    []x14
+    [ 1 , 2 , 1 , 1 , 4 , 1 , 2 , 1 , 3 , 4 , 1 , 1 , 7 ]x14
+          +           +       +           +           +   => 19
+          +           +       +       +       +       +   => 19
     
     
     Eg. Closest, Furthest, Closest, Closest
-    []x14
-    
+    [ 2 , 1 , 1 , 4 , 1 , 1 , 1 , 1 , 3 ]x14
+      +           +       +           +   => 10
     
     Eg. Closest, Furthest, Closest, Furthest
     []x14
@@ -117,8 +120,9 @@ curr_max = ()
 class Solution:
     def rob(self, nums: List[int]) -> int:
         
-        highest_val = 0
+        return
+        #highest_val = 0
         
-        for i in range(len(nums)):
+        #for i in range(len(nums)):
             
         
